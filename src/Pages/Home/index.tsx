@@ -1,21 +1,20 @@
 import React from "react";
+import { useLocation } from "wouter";
 
 import useUser from "../../hooks/useUser";
-
-import Header from "../../Components/Header";
 import Usercard from "../../Components/Usercard";
 import { Container } from "./style";
 
 const Home: React.FC = () => {
+  const [_, setLocation] = useLocation();
   const { user: users } = useUser();
 
   const handleCardClick = (id: number): void => {
-    console.log("Card clicked with id: ", id);
+    setLocation(`/user/${id}`);
   };
 
   return (
     <>
-      <Header />
       <Container>
         {users.map((user) => {
           return <Usercard user={user} onClick={handleCardClick} />;
